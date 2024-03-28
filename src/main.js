@@ -57,9 +57,9 @@ export const doFetchGetCommentList = () => {
         })
         .catch((error) => {
             todoException500(error)
+            checkIsInternet(window) // Обработка ошибки отсутствия интернета
         })
 }
-
 export const doFetchPostComment = () => {
     const addLoader = document.querySelector('.loader-comment')
     const addFormTextElement = document.getElementById('add-form-text')

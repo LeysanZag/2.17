@@ -28,7 +28,7 @@ export function checkIsInternet(window) {
 
 export function checkStatus401(response) {
     if (response.status === 401) {
-        // password = prompt('Введите верный пароль')
+
         getTodos()
         throw new Error('Нет авторизации')
     }
@@ -40,9 +40,24 @@ export function todoException500(error) {
         alert('Сервер не отвечает, попробуйте позже')
     }
 }
+export function todoException400(error) {
+    if (error.message === 'Неверный запрос') {
+        alert('Короткое имя или текст комментария, минимум 3 символа');
+    } else {
+        throw error;
+    }
+}
+export function checkStatus400(response) {
+    if (response.status === 400) {
+        return Promise.reject(new Error('Неверный запрос'));
+    }
+    return response.json();
+}
 
 export function todoException400(error) {
     if (error.message === 'Неверный запрос') {
-        alert('Короткое имя или текст комментария, минимум 3 символа')
+        alert('Ошибка: неверный запрос');
+    } else {
+        throw error;
     }
 }
